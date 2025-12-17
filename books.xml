@@ -1,0 +1,32 @@
+<catalog>
+  <book>
+    <title>1984</title>
+    <author>George Orwell</author>
+    <year>1949</year>
+    <genre>Dystopian</genre>
+  </book>
+  <book>
+    <title>To Kill a Mockingbird</title>
+    <author>Harper Lee</author>
+    <year>1960</year>
+    <genre>Literary Fiction</genre>
+  </book>
+  <book>
+    <title>Dune</title>
+    <author>Frank Herbert</author>
+    <year>1965</year>
+    <genre>Science Fiction</genre>
+  </book>
+  <book>
+    <title>Pride and Prejudice</title>
+    <author>Jane Austen</author>
+    <year>1813</year>
+    <genre>Romance</genre>
+  </book>
+  <book>
+    <title>The Hitchhiker's Guide to the Galaxy</title>
+    <author>Douglas Adams</author>
+    <year>1979</year>
+    <genre>Science Fiction</genre>
+  </book>
+</catalog>

@@ -1,0 +1,118 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&family=Lora&display=swap');
+
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lora', serif;
+  background: linear-gradient(to bottom, #fdf6ee, #e8dcc4);
+  color: #3a3a3a;
+  padding: 40px;
+  line-height: 1.6;
+}
+
+/* Header Styling */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8em;
+  color: #5c4438;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8em;
+  color: #5c4438;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #cbb89d;
+  padding-bottom: 5px;
+}
+
+/* Form Styling */
+form {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #cbb89d;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: #fdfaf6;
+}
+
+input[type="submit"] {
+  background-color: #5c4438;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #7a5c4a;
+}
+
+/* Message Entries */
+.entry {
+  background-color: #fff;
+  border-left: 5px solid #cbb89d;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.entry p {
+  margin-bottom: 10px;
+}
+
+.entry strong {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.5em;
+  color: #7a5c4a;
+}
+
+.entry small {
+  color: #888;
+  font-style: italic;
+}
+
+/* Optional Navigation */
+nav {
+  text-align: center;
+  margin-top: 40px;
+}
+
+nav a {
+  color: #5c4438;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
