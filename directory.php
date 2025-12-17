@@ -12,7 +12,7 @@ $entries_to_display = [];
 $host = 'sql111.infinityfree.com';  
 $db   = 'if0_40395051_student_directory';  
 $user = 'if0_40395051';            
-$pass = '3PWJ54EUazO'; 
+$pass = '';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
