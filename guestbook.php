@@ -7,10 +7,10 @@ $success_message = '';
 $entries_to_display = [];
 
 // --- Database Configuration (FINAL LIVE HOST SETTINGS) ---
-$host = 'sql111.infinityfree.com';  
-$db   = 'if0_42866746_guestbook'; // Updated to your new DB name from phpMyAdmin
-$user = 'if0_42866746';                   // Updated to your active username
-$pass = 'YOUR_INFINITYFREE_PASSWORD';     // Paste your MySQL/vPanel account password here
+$host = $env['GUESTBOOK_DB_HOST'];
+$db   = $env['GUESTBOOK_DB_NAME'];
+$user = $env['GUESTBOOK_DB_USER'];
+$pass = $env['GUESTBOOK_DB_PASS'];
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
