@@ -8,6 +8,9 @@ $errors = [];
 $success_message = '';
 $entries_to_display = [];
 
+// --- Load Environment Variables ---
+$env = parse_ini_file(__DIR__ . '/.env');
+
 // --- Database Configuration ---
 $host = $env['DIRECTORY_DB_HOST'];
 $db   = $env['DIRECTORY_DB_NAME'];
@@ -167,7 +170,7 @@ $page_title = "Student Directory";
 
     <footer>
         <div class="container">
-            <p>&copy; <?php echo date("Y"); ?>  Final Project Application | Designed by Mazharul Juniad</p>
+            <p>&copy; <?php echo date("Y"); ?> Final Project Application | Designed by Mazharul Juniad</p>
         </div>
     </footer>
 </body>
