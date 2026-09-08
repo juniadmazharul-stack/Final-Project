@@ -1,6 +1,6 @@
 <?php
 /**
- * Student Directory - SQL Version for InfinityFree
+ * Student Directory - SQL Version
  */
 
 // Configuration and Initialization
@@ -8,16 +8,28 @@ $errors = [];
 $success_message = '';
 $entries_to_display = [];
 
-// --- Load Environment Variables ---
-$env = parse_ini_file(__DIR__ . '/.env');
+// --- Load Environment Variables (Render Env Vars with .env Fallback) ---
+$host = getenv('DIRECTORY_DB_HOST') ?: ($_ENV['DIRECTORY_DB_HOST'] ?? null);
+$db   = getenv('DIRECTORY_DB_NAME') ?: ($_ENV['DIRECTORY_DB_NAME'] ?? null);
+$user = getenv('DIRECTORY_DB_USER') ?: ($_ENV['DIRECTORY_DB_USER'] ?? null);
+$pass = getenv('DIRECTORY_DB_PASS') ?: ($_ENV['DIRECTORY_DB_PASS'] ?? null);
 
-// --- Database Configuration ---
-$host = $env['DIRECTORY_DB_HOST'];
-$db   = $env['DIRECTORY_DB_NAME'];
-$user = $env['DIRECTORY_DB_USER'];
-$pass = $env['DIRECTORY_DB_PASS'];
+// Fall back to reading local .env if direct environment variables aren't set
+if (!$host) {
+    $env_path = __DIR__ . '/.env';
+    if (file_exists($env_path) && is_readable($env_path)) {
+        $env = parse_ini_file($env_path);
+        $host = $env['DIRECTORY_DB_HOST'] ?? '';
+        $db   = $env['DIRECTORY_DB_NAME'] ?? '';
+        $user = $env['DIRECTORY_DB_USER'] ?? '';
+        $pass = $env['DIRECTORY_DB_PASS'] ?? '';
+    } else {
+        die("Database configuration error: Missing environment variables or readable .env file.");
+    }
+}
+
 $charset = 'utf8mb4';
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$dsn = "mysql:host=$host;port=3306;dbname=$db;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -38,7 +50,7 @@ try {
 
 } catch (PDOException $e) {
     // If connection fails, stop and show the error
-    die("Database connection failed. Please verify your credentials in phpMyAdmin. Error: " . $e->getMessage());
+    die("Database connection failed. Please verify your credentials. Error: " . $e->getMessage());
 }
 
 // --- 1. Handle Form Submission (POST) ---
@@ -173,5 +185,7 @@ $page_title = "Student Directory";
             <p>&copy; <?php echo date("Y"); ?> Final Project Application | Designed by Mazharul Juniad</p>
         </div>
     </footer>
+</body>
+</html>
 </body>
 </html>
