@@ -5,22 +5,29 @@ $name = '';
 $message = '';
 $entries_to_display = [];
 
-// --- Database Configuration via .env ---
-$env_path = __DIR__ . '/.env';
+// --- Database Configuration (Render Env Vars with .env Fallback) ---
+$host = getenv('GUESTBOOK_DB_HOST') ?: ($_ENV['GUESTBOOK_DB_HOST'] ?? null);
+$db   = getenv('GUESTBOOK_DB_NAME') ?: ($_ENV['GUESTBOOK_DB_NAME'] ?? null);
+$user = getenv('GUESTBOOK_DB_USER') ?: ($_ENV['GUESTBOOK_DB_USER'] ?? null);
+$pass = getenv('GUESTBOOK_DB_PASS') ?: ($_ENV['GUESTBOOK_DB_PASS'] ?? null);
 
-if (!file_exists($env_path)) {
-    die("Database connection failed: The .env file was not found in " . __DIR__);
+// Fall back to reading a local .env file if environment variables aren't set directly
+if (!$host) {
+    $env_path = __DIR__ . '/.env';
+    if (file_exists($env_path) && is_readable($env_path)) {
+        $env = parse_ini_file($env_path);
+        $host = $env['GUESTBOOK_DB_HOST'] ?? '';
+        $db   = $env['GUESTBOOK_DB_NAME'] ?? '';
+        $user = $env['GUESTBOOK_DB_USER'] ?? '';
+        $pass = $env['GUESTBOOK_DB_PASS'] ?? '';
+    } else {
+        die("Database configuration error: Missing environment variables or readable .env file.");
+    }
 }
 
-$env = parse_ini_file($env_path);
-
-$host    = $env['GUESTBOOK_DB_HOST'] ?? '';
-$db      = $env['GUESTBOOK_DB_NAME'] ?? '';
-$user    = $env['GUESTBOOK_DB_USER'] ?? '';
-$pass    = $env['GUESTBOOK_DB_PASS'] ?? '';
 $charset = 'utf8mb4';
 
-// Explicitly include port=3306 to force TCP/IP over InfinityFree
+// Use TCP/IP connection over port 3306
 $dsn = "mysql:host=$host;port=3306;dbname=$db;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
