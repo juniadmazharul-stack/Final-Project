@@ -14,10 +14,10 @@ if (!file_exists($env_path)) {
 
 $env = parse_ini_file($env_path);
 
-$host    = $env['GUESTBOOK_DB_HOST'] ?? '';
-$db      = $env['GUESTBOOK_DB_NAME'] ?? '';
-$user    = $env['GUESTBOOK_DB_USER'] ?? '';
-$pass    = $env['GUESTBOOK_DB_PASS'] ?? '';
+$host    = $env['GUESSBOOK_DB_HOST'] ?? '';
+$db      = $env['GUESSBOOK_DB_NAME'] ?? '';
+$user    = $env['GUESSBOOK_DB_USER'] ?? '';
+$pass    = $env['GUESSBOOK_DB_PASS'] ?? '';
 $charset = 'utf8mb4';
 
 // Explicitly include port=3306 to force TCP/IP over InfinityFree
