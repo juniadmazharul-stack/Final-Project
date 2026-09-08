@@ -99,9 +99,9 @@ try {
         </nav>
     </header>
 
-    <main class="max-w-4xl mx-auto p-4 sm:p-6">
+    <main class="w-full max-w-7xl mx-auto p-4 sm:p-6">
         <!-- Guestbook Form Section -->
-        <div class="card bg-white p-6 md:p-8 rounded-xl mb-12 border-t-4 border-green-500 shadow-md">
+        <div class="card bg-white p-6 md:p-8 rounded-xl mb-12 border-t-4 border-green-500 shadow-md w-full">
             <h2 class="text-2xl font-semibold mb-6 text-gray-700">Sign the Guestbook</h2>
             
             <?php if (!empty($errors)): ?>
@@ -139,7 +139,7 @@ try {
         </div>
         
         <!-- Entries Display Section -->
-        <div class="card bg-white p-6 md:p-8 rounded-xl border-t-4 border-gray-300 shadow-md">
+        <div class="card bg-white p-6 md:p-8 rounded-xl border-t-4 border-gray-300 shadow-md w-full">
             <h2 class="text-2xl font-semibold mb-6 text-gray-700">Recent Entries (<?php echo count($entries_to_display); ?>)</h2>
             
             <?php if (empty($entries_to_display)): ?>
