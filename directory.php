@@ -9,12 +9,11 @@ $success_message = '';
 $entries_to_display = [];
 
 // --- Database Configuration ---
-$host = 'sql111.infinityfree.com';  
-$db   = 'if0_42866746_student_directory'; // Updated to your new DB name from phpMyAdmin
-$user = 'if0_42866746';                   // Updated to your active username
-$pass = 'YOUR_INFINITYFREE_PASSWORD';     // Paste your MySQL/vPanel account password here
+$host = $env['DB_HOST'];
+$db   = $env['DB_NAME'];
+$user = $env['DB_USER'];
+$pass = $env['DB_PASS']; 
 $charset = 'utf8mb4';
-
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
