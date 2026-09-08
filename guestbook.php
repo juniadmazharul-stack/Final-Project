@@ -8,9 +8,9 @@ $entries_to_display = [];
 
 // --- Database Configuration (FINAL LIVE HOST SETTINGS) ---
 $host = 'sql111.infinityfree.com';  
-$db   = 'if0_40395051_guessbook';  
-$user = 'if0_40395051';            
-$pass = '';
+$db   = 'if0_42866746_guestbook'; // Updated to your new DB name from phpMyAdmin
+$user = 'if0_42866746';                   // Updated to your active username
+$pass = 'YOUR_INFINITYFREE_PASSWORD';     // Paste your MySQL/vPanel account password here
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
