@@ -6,15 +6,22 @@ $message = '';
 $entries_to_display = [];
 
 // --- Database Configuration via .env ---
-$env = parse_ini_file(__DIR__ . '/.env');
+$env_path = __DIR__ . '/.env';
 
-$host    = $env['GUESTBOOK_DB_HOST'];
-$db      = $env['GUESTBOOK_DB_NAME'];
-$user    = $env['GUESTBOOK_DB_USER'];
-$pass    = $env['GUESTBOOK_DB_PASS'];
+if (!file_exists($env_path)) {
+    die("Database connection failed: The .env file was not found in " . __DIR__);
+}
+
+$env = parse_ini_file($env_path);
+
+$host    = $env['GUESTBOOK_DB_HOST'] ?? '';
+$db      = $env['GUESTBOOK_DB_NAME'] ?? '';
+$user    = $env['GUESTBOOK_DB_USER'] ?? '';
+$pass    = $env['GUESTBOOK_DB_PASS'] ?? '';
 $charset = 'utf8mb4';
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+// Explicitly include port=3306 to force TCP/IP over InfinityFree
+$dsn = "mysql:host=$host;port=3306;dbname=$db;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -25,7 +32,7 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
     
     // Auto-create guestbook table if missing
-    $pdo->exec("CREATE TABLE IF NOT EXISTS guestbook_entries (
+    $pdo->exec("CREATE TABLE IF NOT EXISTS guestbook (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         message TEXT NOT NULL,
@@ -49,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (empty($errors)) {
         try {
-            $stmt = $pdo->prepare("INSERT INTO guestbook_entries (name, message) VALUES (?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO guestbook (name, message) VALUES (?, ?)");
             $stmt->execute([$name, $message]); 
 
             header("Location: " . $_SERVER['PHP_SELF']); 
@@ -62,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 // --- 2. Read Entries for Display ---
 try {
-    $stmt = $pdo->query("SELECT id, name, message, submitted_at FROM guestbook_entries ORDER BY submitted_at DESC");
+    $stmt = $pdo->query("SELECT id, name, message, submitted_at FROM guestbook ORDER BY submitted_at DESC");
     $entries_to_display = $stmt->fetchAll();
 } catch (\PDOException $e) {
     $errors[] = "Could not retrieve guestbook entries: " . $e->getMessage();
